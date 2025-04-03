@@ -14,11 +14,11 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -30,7 +30,44 @@ public class Room
     {
         this.description = description;
     }
-
+    
+    public String getExitString(){
+        String exitString = "You are " + description;
+        exitString = exitString + "\nExits: ";
+        if(!northExit.equals(null)) {
+            exitString += "north";
+        }
+        if(!northExit.equals(null)) {
+            exitString += "east"; 
+        }
+        if(!northExit.equals(null)) {
+            exitString += "south"; 
+        }
+        if(!northExit.equals(null)) {
+            exitString += "west";
+        }    
+        
+        return exitString;
+    }
+    
+    
+    public Room getExit(String direction){
+        Room nextRoom = null;
+        if(direction.equals("north")) {
+            nextRoom = this.northExit;
+        }
+        if(direction.equals("east")) {
+            nextRoom = this.eastExit;
+        }
+        if(direction.equals("west")) {
+            nextRoom = this.westExit;
+        }
+         if(direction.equals("sount")) {
+            nextRoom = this.southExit;
+        }
+        return null;
+    }
+    
     /**
      * Define the exits of this room.  Every direction either leads
      * to another room or is null (no exit there).
