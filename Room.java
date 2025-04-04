@@ -32,18 +32,18 @@ public class Room
     }
     
     public String getExitString(){
-        String exitString = "You are " + description;
-        exitString = exitString + "\nExits: ";
-        if(!northExit.equals(null)) {
+        
+        String exitString ="Exits: ";
+        if(northExit!=null) {
             exitString += "north";
         }
-        if(!northExit.equals(null)) {
+        if(northExit!=null) {
             exitString += "east"; 
         }
-        if(!northExit.equals(null)) {
+        if(northExit!=null) {
             exitString += "south"; 
         }
-        if(!northExit.equals(null)) {
+        if(northExit!=null) {
             exitString += "west";
         }    
         
