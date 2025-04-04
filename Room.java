@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -15,10 +17,8 @@
 public class Room 
 {
     private String description;
-    private Room northExit;
-    private Room southExit;
-    private Room eastExit;
-    private Room westExit;
+    private HashMap<String,Room> exits;
+    
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,68 +29,34 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+        exits = new HashMap<>();
     }
     
     public String getExitString(){
+        String exitString ="Exits: "; 
         
-        String exitString ="Exits: ";
-        if(northExit!=null) {
-            exitString += "north";
+        for(String direction : exits.keySet()){
+            exitString += (direction + " ");
         }
-        if(northExit!=null) {
-            exitString += "east"; 
-        }
-        if(northExit!=null) {
-            exitString += "south"; 
-        }
-        if(northExit!=null) {
-            exitString += "west";
-        }    
         
         return exitString;
     }
     
     
     public Room getExit(String direction){
-        Room nextRoom = null;
-        if(direction.equals("north")) {
-            nextRoom = this.northExit;
-        }
-        if(direction.equals("east")) {
-            nextRoom = this.eastExit;
-        }
-        if(direction.equals("west")) {
-            nextRoom = this.westExit;
-        }
-         if(direction.equals("sount")) {
-            nextRoom = this.southExit;
-        }
-        return null;
+        return exits.get(direction); 
     }
+   
     
     /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
+     * Set the exit to a particular direction to a neighbour
+     * @param direction to move
+     * @param neighbor is the location name
      */
-    public void setExits(Room north, Room east, Room south, Room west) 
-    {
-        if(north != null) {
-            northExit = north;
-        }
-        if(east != null) {
-            eastExit = east;
-        }
-        if(south != null) {
-            southExit = south;
-        }
-        if(west != null) {
-            westExit = west;
-        }
-    }
+    
+    public void setExit(String direction, Room neighbor) {
+        exits.put(direction, neighbor);
+    }      
 
     /**
      * @return The description of the room.
@@ -98,6 +64,10 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+    
+    public String getLongDescription(){
+        return "You are" + description + ".\n" + getExitString();
     }
 
 }
