@@ -48,7 +48,7 @@ public class Room
     public Room getExit(String direction){
         return exits.get(direction); 
     }
-   
+       //
     
     /**
      * Set the exit to a particular direction to a neighbour
@@ -77,7 +77,7 @@ public class Room
     }
     
     public String getLongDescription(){
-        String itemInfo = (item != null) ? "You see" + " " + item : "There is nothing here";
+        String itemInfo = (item != null) ? "You see" + " " + item.toString() : "There is nothing here";
         return "You are" + " " + description + ".\n" + itemInfo + getExitString();
     }
 
