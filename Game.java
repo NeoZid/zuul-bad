@@ -43,15 +43,21 @@ public class Game
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
         
+        // items
+        Item beercans = new Item("beer cans for 10 cents!", 0.5);
+        Item popcorn = new Item("some old popcorn", 0.1);
         // initialise room exits
         
         outside.setExit("east",theater);
         outside.setExit("south",lab);
         outside.setExit("west",pub);
         
+        
         theater.setExit("west", outside);
+        theater.setItem(popcorn);
     
         pub.setExit("east",outside);
+        pub.setItem(beercans);
         
         lab.setExit("north", outside);
         lab.setExit("east", office);

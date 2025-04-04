@@ -18,6 +18,7 @@ public class Room
 {
     private String description;
     private HashMap<String,Room> exits;
+    private Item item;
     
 
     /**
@@ -30,6 +31,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
+        item = null;
     }
     
     public String getExitString(){
@@ -56,7 +58,15 @@ public class Room
     
     public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
-    }      
+    } 
+    
+    public void setItem(Item item){
+        this.item = item;
+    } 
+    
+    public Item getItem(){
+        return item;
+    } 
 
     /**
      * @return The description of the room.
@@ -67,7 +77,8 @@ public class Room
     }
     
     public String getLongDescription(){
-        return "You are" + description + ".\n" + getExitString();
+        String itemInfo = (item != null) ? "You see" + " " + item : "There is nothing here";
+        return "You are" + " " + description + ".\n" + itemInfo + getExitString();
     }
 
 }
