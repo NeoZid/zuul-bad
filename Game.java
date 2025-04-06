@@ -19,7 +19,8 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private Room previousRoom;
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -131,9 +132,10 @@ public class Game
         else if(commandWord.equals("look")){
             System.out.println("Looking around");
         }
+        else if(commandWord.equals("back")){
+            goBack();
+        }
         
-    
-
         return wantToQuit;
     }
 
@@ -152,7 +154,20 @@ public class Game
         System.out.println("Your command words are:");
         System.out.println(parser.showAllCommands()); 
     }
-
+    
+    private void goBack(){
+        if (previousRoom == null){
+            System.out.println("Cant go back!");
+        
+        } else {
+            Room temp = currentRoom;
+            currentRoom = previousRoom;
+            previousRoom = temp;
+            printLocationInfo();
+        }
+    
+    }
+    
     /** 
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
@@ -174,6 +189,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            previousRoom = currentRoom;
             currentRoom = nextRoom;
             printLocationInfo();
         }
@@ -194,4 +210,6 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+    
+    
 }
